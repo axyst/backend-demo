@@ -10,42 +10,45 @@ import org.springframework.web.context.request.ServletRequestAttributes;
 
 import javax.servlet.http.HttpServletRequest;
 
+// 切点日志
 @Aspect
 @Component
 public class HttpAspect {
 
     private final static Logger logger = LoggerFactory.getLogger(HttpAspect.class);
 
-    @Pointcut("execution(public * com.example.demo.controller.HelloController.*(..))")
-    public void log() {
+    @Pointcut("execution(public * com.example.demo.controller..*.*(..))")
+    public void webLog() {
 
     }
 
-    @Before("log()")
-    public void logBefore(JoinPoint joinPoint) {
+    @Before("webLog()")
+    public void logBefore(JoinPoint joinPoint) throws Throwable {
 //        logger.info("before");
 //        logger.error();
         ServletRequestAttributes attributes = (ServletRequestAttributes) RequestContextHolder.getRequestAttributes();
         HttpServletRequest request = attributes.getRequest();
         //url
-        logger.info("url={}", request.getRequestURL());
+        logger.info("URL : " + request.getRequestURL());
         //method
-        logger.info("method={}", request.getMethod());
+        logger.info("METHOD : " + request.getMethod());
         //ip
-        logger.info("ip={}", request.getRemoteAddr());
+        logger.info("IP : " + request.getRemoteAddr());
         //class method
-        logger.info("class method={}", joinPoint.getSignature().getDeclaringTypeName() + "."
+        logger.info("CLASS METHOD : " + joinPoint.getSignature().getDeclaringTypeName() + "."
                 + joinPoint.getSignature().getName());
         //parameter
-        logger.info("parameter={}", joinPoint.getArgs());
+        logger.info("ARG : " + joinPoint.getArgs());
     }
 
-//    @After("log()")
+    //    @After("log()")
 //    public void logAfter() {
 //        logger.info("after");
-//    }
-//    @AfterReturning(returning = "object", pointcut = "log()")
-//    public void logAfterReturning(Object object) {
 //        logger.info("response={}", object.toString());
 //    }
+    @AfterReturning(returning = "ret", pointcut = "webLog()")
+    public void doAfterReturning(Object ret) throws Throwable {
+        // 处理完请求，返回内容
+        logger.info("RESPONSE : " + ret);
+    }
 }

@@ -1,7 +1,5 @@
 package com.example.demo;
 
-import com.example.demo.domain.Hello;
-import com.example.demo.service.HelloService;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -31,8 +29,9 @@ public class HelloServiceTest {
     @Autowired
     private MockMvc mvc;
     @Test
-    public void helloList() throws Exception {
-        mvc.perform(MockMvcRequestBuilders.get("/hellos")).andExpect(MockMvcResultMatchers.status().isOk());
+    public void mainPage() throws Exception {
+        mvc.perform(MockMvcRequestBuilders.get("/")).andExpect(MockMvcResultMatchers.status().isOk());
         //.andExpect(MockMvcResultMatchers.content().string("abc"))
     }
+
 }
