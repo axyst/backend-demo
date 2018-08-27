@@ -1,3 +1,4 @@
+/*
 package com.example.demo.repository;
 
 import com.example.demo.domain.User;
@@ -8,6 +9,8 @@ import org.springframework.data.repository.query.Param;
 // jpa实现数据库操作
 public interface UserRepository extends JpaRepository<User, Long> {
 
+    User findByID(Long id);
+
     User findByName(String name);
 
     User findByNameAndAge(String name, Integer age);
@@ -15,4 +18,4 @@ public interface UserRepository extends JpaRepository<User, Long> {
     @Query("from User u where u.name=:name")
     User findUser(@Param("name") String name);
 
-}
+}*/

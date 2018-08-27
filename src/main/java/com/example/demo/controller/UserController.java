@@ -1,8 +1,13 @@
 package com.example.demo.controller;
 
+import com.example.demo.aspect.HttpAspect;
+import com.example.demo.service.UserService;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import com.example.demo.domain.User;
 
@@ -10,53 +15,36 @@ import java.util.*;
 
 
 @RestController
-@RequestMapping(value = "/users")     // 通过这里配置使下面的映射都在/users下，可去除
+@RequestMapping(value = "/user")     // 下面的映射都在/users下
 public class UserController {
+    @Autowired
+    private UserService userService;
+    private final static Logger logger = LoggerFactory.getLogger(HttpAspect.class);
 
-    static Map<Long, User> users = Collections.synchronizedMap(new HashMap<Long, User>());
-
-    @ApiOperation(value = "获取用户列表", notes = "")
-    @RequestMapping(value = {""}, method = RequestMethod.GET)
-    public List<User> getUserList() {
-        List<User> r = new ArrayList<User>(users.values());
-        return r;
+    @RequestMapping(value = "/list", method = RequestMethod.GET)
+    public List<User> getList() {
+        return userService.findAll();
     }
 
-    @ApiOperation(value = "创建用户", notes = "根据User对象创建用户")
-    @ApiImplicitParam(name = "user", value = "用户详细实体user", required = true, dataType = "User")
-    @RequestMapping(value = "", method = RequestMethod.POST)
-    public String postUser(@RequestBody User user) {
-        users.put(user.getID(), user);
-        return "success";
+    @RequestMapping(value = "/{username}/find", method = RequestMethod.GET)
+    public List<User> findUser(@PathVariable String username) {
+        return userService.findByName(username);
     }
 
-    @ApiOperation(value = "获取用户详细信息", notes = "根据url的id来获取用户详细信息")
-    @ApiImplicitParam(name = "id", value = "用户ID", required = true, dataType = "Long")
-    @RequestMapping(value = "/{id}", method = RequestMethod.GET)
-    public User getUser(@PathVariable Long id) {
-        return users.get(id);
+    @RequestMapping(value = "/{username}/{age}/insert", method = RequestMethod.GET)
+    public void insertUser(@PathVariable String username, @PathVariable int age) {
+        userService.insertUser(username, age);
     }
 
-    @ApiOperation(value = "更新用户详细信息", notes = "根据url的id来指定更新对象，并根据传过来的user信息来更新用户详细信息")
-    @ApiImplicitParams({
-            @ApiImplicitParam(name = "id", value = "用户ID", required = true, dataType = "Long"),
-            @ApiImplicitParam(name = "user", value = "用户详细实体user", required = true, dataType = "User")
-    })
-    @RequestMapping(value = "/{id}", method = RequestMethod.PUT)
-    public String putUser(@PathVariable Long id, @RequestBody User user) {
-        User u = users.get(id);
-        u.setName(user.getName());
-        u.setAge(user.getAge());
-        users.put(id, u);
-        return "success";
+    @RequestMapping(value = "/{userid}/remove", method = RequestMethod.GET)
+    public void deleteUser(@PathVariable Long userid) {
+        userService.deleteUser(userid);
     }
 
-    @ApiOperation(value = "删除用户", notes = "根据url的id来指定删除对象")
-    @ApiImplicitParam(name = "id", value = "用户ID", required = true, dataType = "Long")
-    @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
-    public String deleteUser(@PathVariable Long id) {
-        users.remove(id);
-        return "success";
+    @RequestMapping(value = "/{userid}/modify/{username}/{age}", method = RequestMethod.GET)
+    public void modifyUser(@PathVariable Long userid, @PathVariable String username, @PathVariable Integer age) {
+        userService.updateUser(userid, username, age);
     }
+
 
 }
