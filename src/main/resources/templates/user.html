@@ -1,10 +1,118 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
 
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>user</title>
+    <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="fonts/font-awesome.min.css">
+    <link rel="stylesheet" href="css/Features-Boxed.css">
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+
+<body>
+<div class="features-boxed">
+    <div class="container">
+        <div class="intro">
+            <h2 class="text-center">User page</h2>
+            <p class="text-center">User List:</p>
+            <div class="panel-body">
+                <table class="table able-hover">
+                    <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>名称</th>
+                        <th>年龄</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+<!--                                        <tr th:each="listed:${userlist}">
+                                            <td th:text="${listed.id}"></td>
+
+                                            <td th:text="${listed.name}"></td>
+
+                                            <td th:text="${listed.age}"></td>
+                                        </tr>-->
+                    </tbody>
+                </table>
+            </div>
+            <p class="text-center"></p>
+            <button class="btn btn-primary" type="button" id="refreshBtn">
+                Refresh
+            </button>
+        </div>
+        <div class="row justify-content-center features">
+            <div class="col-sm-6 col-md-5 col-lg-4 item">
+                <div class="box">
+                    <h3 class="name">Insert user</h3><label>name:&nbsp;</label><input
+                        type="text">
+                    <p></p><label>age:&nbsp;</label><input type="text">
+                    <p></p>
+                    <button class="btn btn-primary" type="button" id="insertBtn" data-toggle="modal"
+                            data-target="#myModal">Confirm
+                    </button>
+                </div>
+            </div>
+            <div class="col-sm-6 col-md-5 col-lg-4 item">
+                <div class="box">
+                    <h3 class="name">Update user</h3><label>ID:&nbsp;</label><input
+                        type="text">
+                    <p></p><label>name:&nbsp;</label><input type="text">
+                    <p></p><label>age:&nbsp;</label><input
+                        type="text">
+                    <p></p>
+                    <button class="btn btn-primary" type="button" id="updateBtn" data-toggle="modal"
+                            data-target="#myModal">Confirm
+                    </button>
+                </div>
+            </div>
+            <div class="col-sm-6 col-md-5 col-lg-4 item">
+                <div class="box">
+                    <h3 class="name">Find user</h3><label>name:&nbsp;</label><input
+                        type="text">
+                    <p></p><label>age:&nbsp;</label><input type="text">
+                    <p></p>
+                    <button class="btn btn-primary" type="button" id="findBtn" data-toggle="modal"
+                            data-target="#myModal">Confirm
+                    </button>
+                </div>
+            </div>
+            <div class="col-sm-6 col-md-5 col-lg-4 item">
+                <div class="box">
+                    <h3 class="name">Delete user</h3><label>ID:&nbsp;</label><input type="text">
+                    <p></p>
+                    <button class="btn btn-primary" type="button" id="deleteBtn" data-toggle="modal"
+                            data-target="#myModal">Confirm
+                    </button>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+<!-- 模态框（Modal） -->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title" id="myModalLabel">模态框（Modal）标题</h4>
+            </div>
+            <div class="modal-body">
+                <p id="showmsg"></p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                <button type="button" class="btn btn-primary">提交更改</button>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal -->
+</div>
+<!--<script src="js/logic.js"></script>-->
+<script src="js/jquery.min.js"></script>
+<script src="bootstrap/js/bootstrap.min.js"></script>
 </body>
+
 </html>

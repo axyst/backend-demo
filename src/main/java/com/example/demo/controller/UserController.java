@@ -26,22 +26,22 @@ public class UserController {
         return userService.findAll();
     }
 
-    @RequestMapping(value = "/{username}/find", method = RequestMethod.GET)
+    @RequestMapping(value = "/find/{username}", method = RequestMethod.GET)
     public List<User> findUser(@PathVariable String username) {
         return userService.findByName(username);
     }
 
-    @RequestMapping(value = "/{username}/{age}/insert", method = RequestMethod.GET)
+    @RequestMapping(value = "/insert/{username}/{age}", method = RequestMethod.GET)
     public void insertUser(@PathVariable String username, @PathVariable int age) {
         userService.insertUser(username, age);
     }
 
-    @RequestMapping(value = "/{userid}/remove", method = RequestMethod.GET)
+    @RequestMapping(value = "remove/{userid}", method = RequestMethod.GET)
     public void deleteUser(@PathVariable Long userid) {
         userService.deleteUser(userid);
     }
 
-    @RequestMapping(value = "/{userid}/modify/{username}/{age}", method = RequestMethod.GET)
+    @RequestMapping(value = "modify/{userid}/{username}/{age}", method = RequestMethod.GET)
     public void modifyUser(@PathVariable Long userid, @PathVariable String username, @PathVariable Integer age) {
         userService.updateUser(userid, username, age);
     }
