@@ -1,24 +1,24 @@
 /*<![CDATA[*/
 
-/*let user = {
+var user = {
 
     url: {
         lists: function () {
-            return '/user/list';
+            return 'user/list/';
         },
         finds: function (name) {
-            return '/user/find/' + name;
+            return 'user/find/' + name;
         },
         insert: function (name, age) {
-            return '/user/insert/' + name + '/' + age;
+            return 'user/insert/' + name + '/' + age;
         },
-        modify: function (id, name, age) {
-            return '/user/modify/' + id + +'/' + name + '/' + age;
+        update: function (id, name, age) {
+            return 'user/update/' + id + +'/' + name + '/' + age;
         },
         removes: function (id) {
-            return '/user/remove/' + id;
+            return 'user/remove/' + id;
         }
-    },
+    }/*,
     handleruser: function (id) {
         $.get(user.url.resolve(id), {}, function (result) {
             if (result && result['success']) {
@@ -33,39 +33,56 @@
             }
         });
 
-    },
-
-
-};*/
+    },*/
+};
 
 $('#refreshBtn').click(function () {
     window.location.reload();
-
-
 });
 $('#insertBtn').click(function () {
-/*    let showmsg = $('#showmsg');
-    showmsg.html('<span class="label label-success">' + 'lists' + '</span>');
-    $.post(showurl, {}, function (result) {
-        console.log(result);
-        if (result && result['success']) {
-            let showResult = result['data'];
-            let state = showResult['state'];
-            let stateInfo = showResult['stateInfo'];
-            node.html('<span class="label label-success">' + stateInfo + '</span>');
+    var name = $('#insertName').val();
+    var age = $('#insertAge').val();
+    var url = user.url.insert(name, age);
+    $.get(url, function (data) {
+        if (data !== 0) {
+            alert('success inserted');
         }
-    });*/
-
+        else alert('insert failed');
+    })
 });
 
 $('#updateBtn').click(function () {
-
+    var id = $('#updateId').val();
+    var name = $('#updateName').val();
+    var age = $('#updateAge').val();
+    var url = user.url.update(id, name, age);
+    $.get(url, function (data) {
+        if (data !== 0) {
+            alert('success updated');
+        }
+        else alert('update failed');
+    })
 });
 $('#findBtn').click(function () {
-
+    var name = $('#findName').val();
+    var url = user.url.finds(name);
+    $.get(url, function (data) {
+        if (data !== null) {
+            $('#myModal').modal('show');
+            $('#showMsg').append(data);
+        }
+        else alert('no such user');
+    })
 });
 $('#deleteBtn').click(function () {
-
+    var id = $('#deleteId').val();
+    var url = user.url.removes(id);
+    $.get(url, function (data) {
+        if (data !== 0) {
+            alert('delete success');
+        }
+        else alert('delete failed');
+    })
 });
 
 

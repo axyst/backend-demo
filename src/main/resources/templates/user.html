@@ -27,13 +27,13 @@
                     </tr>
                     </thead>
                     <tbody>
-                                        <tr th:each="listed:${userlist}">
-                                            <td th:text="${listed.id}"></td>
+                    <tr th:each="listed:${userlist}">
+                        <td th:text="${listed.id}"></td>
 
-                                            <td th:text="${listed.name}"></td>
+                        <td th:text="${listed.name}"></td>
 
-                                            <td th:text="${listed.age}"></td>
-                                        </tr>
+                        <td th:text="${listed.age}"></td>
+                    </tr>
                     </tbody>
                 </table>
             </div>
@@ -46,44 +46,40 @@
             <div class="col-sm-6 col-md-5 col-lg-4 item">
                 <div class="box">
                     <h3 class="name">Insert user</h3><label>name:&nbsp;</label><input
-                        type="text">
-                    <p></p><label>age:&nbsp;</label><input type="text">
+                        type="text" required="required" id="insertName">
+                    <p></p><label>age:&nbsp;</label><input type="number" required="required" id="insertAge">
                     <p></p>
-                    <button class="btn btn-primary" type="button" id="insertBtn" data-toggle="modal"
-                            data-target="#myModal">Confirm
+                    <button class="btn btn-primary" type="button" id="insertBtn">Confirm
                     </button>
                 </div>
             </div>
             <div class="col-sm-6 col-md-5 col-lg-4 item">
                 <div class="box">
                     <h3 class="name">Update user</h3><label>ID:&nbsp;</label><input
-                        type="text">
-                    <p></p><label>name:&nbsp;</label><input type="text">
+                        type="number" required="required" id="updateId">
+                    <p></p><label>name:&nbsp;</label><input type="text" required="required" id="updateName">
                     <p></p><label>age:&nbsp;</label><input
-                        type="text">
+                        type="number" required="required" id="updateAge">
                     <p></p>
-                    <button class="btn btn-primary" type="button" id="updateBtn" data-toggle="modal"
-                            data-target="#myModal">Confirm
+                    <button class="btn btn-primary" type="button" id="updateBtn">Confirm
                     </button>
                 </div>
             </div>
             <div class="col-sm-6 col-md-5 col-lg-4 item">
                 <div class="box">
                     <h3 class="name">Find user</h3><label>name:&nbsp;</label><input
-                        type="text">
-                    <p></p><label>age:&nbsp;</label><input type="text">
+                        type="text" required="required" id="findName">
+                    <!--<p></p><label>age:&nbsp;</label><input type="text">-->
                     <p></p>
-                    <button class="btn btn-primary" type="button" id="findBtn" data-toggle="modal"
-                            data-target="#myModal">Confirm
+                    <button class="btn btn-primary" type="button" id="findBtn">Confirm
                     </button>
                 </div>
             </div>
             <div class="col-sm-6 col-md-5 col-lg-4 item">
                 <div class="box">
-                    <h3 class="name">Delete user</h3><label>ID:&nbsp;</label><input type="text">
+                    <h3 class="name">Delete user</h3><label>ID:&nbsp;</label><input type="number" required="required" id="deleteId">
                     <p></p>
-                    <button class="btn btn-primary" type="button" id="deleteBtn" data-toggle="modal"
-                            data-target="#myModal">Confirm
+                    <button class="btn btn-primary" type="button" id="deleteBtn">Confirm
                     </button>
                 </div>
             </div>
@@ -97,17 +93,17 @@
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                <h4 class="modal-title" id="myModalLabel">模态框（Modal）标题</h4>
+                <h4 class="modal-title" id="myModalLabel">操作结果</h4>
             </div>
             <div class="modal-body">
-                <p id="showmsg"></p>
+                <p id="showMsg">内容：</p>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
-                <button type="button" class="btn btn-primary">提交更改</button>
+                <!--<button type="button" class="btn btn-primary">提交更改</button>-->
             </div>
-        </div><!-- /.modal-content -->
-    </div><!-- /.modal -->
+        </div>
+    </div>
 </div>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0/js/bootstrap.bundle.min.js"></script>

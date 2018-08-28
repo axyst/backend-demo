@@ -17,17 +17,19 @@ public class UserService {
     private UserMapper userMapper;
 
     @Transactional
-    public void insertUser(String name, Integer age) {
-        userMapper.insert(name, age);
+    public Integer insertUser(String name, Integer age) {
+        return userMapper.insert(name, age);
     }
 
     @Transactional
-    public void insertList(List<User> userList) {
+    public Integer insertList(List<User> userList) {
+        Integer res = 0;
         for (User user : userList) {
             String name = user.getName();
             Integer age = user.getAge();
-            userMapper.insert(name, age);
+            res += userMapper.insert(name, age);
         }
+        return res;
     }
 
     @Transactional
@@ -41,14 +43,16 @@ public class UserService {
     }
 
     @Transactional
-    public void updateUser(Long id, String name, Integer age) {
-        userMapper.updateName(id, name);
-        userMapper.updateAge(id, age);
+    public Integer updateUser(Long id, String name, Integer age) {
+        Integer res = 0;
+        res += userMapper.updateName(id, name);
+        res += userMapper.updateAge(id, age);
+        return res;
     }
 
     @Transactional
-    public void deleteUser(Long id) {
-        userMapper.delete(id);
+    public Integer deleteUser(Long id) {
+        return userMapper.delete(id);
     }
 
     @Transactional

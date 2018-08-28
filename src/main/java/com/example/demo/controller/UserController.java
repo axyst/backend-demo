@@ -15,7 +15,7 @@ import java.util.*;
 
 
 @RestController
-@RequestMapping(value = "/user")     // 下面的映射都在/users下
+@RequestMapping(value = "/user")     // 下面的映射都在/user下
 public class UserController {
     @Autowired
     private UserService userService;
@@ -32,18 +32,18 @@ public class UserController {
     }
 
     @RequestMapping(value = "/insert/{username}/{age}", method = RequestMethod.GET)
-    public void insertUser(@PathVariable String username, @PathVariable int age) {
-        userService.insertUser(username, age);
+    public Integer insertUser(@PathVariable String username, @PathVariable int age) {
+        return userService.insertUser(username, age);
     }
 
-    @RequestMapping(value = "remove/{userid}", method = RequestMethod.GET)
-    public void deleteUser(@PathVariable Long userid) {
-        userService.deleteUser(userid);
+    @RequestMapping(value = "/remove/{userid}", method = RequestMethod.GET)
+    public Integer deleteUser(@PathVariable Long userid) {
+        return userService.deleteUser(userid);
     }
 
-    @RequestMapping(value = "modify/{userid}/{username}/{age}", method = RequestMethod.GET)
-    public void modifyUser(@PathVariable Long userid, @PathVariable String username, @PathVariable Integer age) {
-        userService.updateUser(userid, username, age);
+    @RequestMapping(value = "/update/{userid}/{username}/{age}", method = RequestMethod.GET)
+    public Integer updateUser(@PathVariable Long userid, @PathVariable String username, @PathVariable Integer age) {
+        return userService.updateUser(userid, username, age);
     }
 
 

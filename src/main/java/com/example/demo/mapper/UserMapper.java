@@ -30,13 +30,13 @@ public interface UserMapper {
     int insertByMap(Map<String, Object> map);
 
     @Update("UPDATE USER SET NAME=#{name} WHERE ID=#{id}")
-    void updateName(@Param("id")Long id, @Param("name")String name);
+    int updateName(@Param("id")Long id, @Param("name")String name);
 
     @Update("UPDATE USER SET Age=#{age} WHERE ID=#{id}")
-    void updateAge(@Param("id")Long id, @Param("age")Integer age);
+    int updateAge(@Param("id")Long id, @Param("age")Integer age);
 
     @Delete("DELETE FROM USER WHERE ID =#{id}")
-    void delete(@Param("id")Long id);
+    int delete(@Param("id")Long id);
 
     @Results({
             @Result(property = "id", column = "id"),
