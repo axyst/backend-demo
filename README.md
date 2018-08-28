@@ -1,4 +1,4 @@
-# backend-demo
+# agri-system-demo
 
 Current config:
 
